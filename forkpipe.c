@@ -8,19 +8,26 @@ int main(void)
 
     if (pid == 0)
     {
+        // Child process exits immediately
         printf("Child!\n");
-        exit(2);
+        exit(3);
     }
     else
     {
-        // put parent asleep
+        // Parent process needs to hit RETURN to wait
+        // for child.
         printf("Parent!\n");
-        printf("Press RETURN to wait!\n");
+
+        // Run `ps al` in anohter bash shell to see the
+        // child with `Z`ombie status.
+
+        printf("Press RETURN to wait\n");
         getchar();
-        wait(NULL);
-        printf("Press RETURN to exit!\n");
+
+        wait(NULL); // This reaps the zombie
+
+        printf("Press RETURN to exit\n");
         getchar();
-        // sleep(15);
     }
 
     return 0;
